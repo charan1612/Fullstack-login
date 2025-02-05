@@ -2,7 +2,7 @@ how to run the project:- follow the steps
 
 Step-1: Cloning:-
 
-git clone <repository-url>
+git clone https://github.com/charan1612/Fullstack-login.git
 
 step-2: Backend:-
 
