@@ -32,4 +32,6 @@ Run:-
 
 npm start
 
+Note:- in .eve file place your mongodb credentails.
+
 if still any errors appering contact me on mail mail parugula.saicharan@gmail.com
