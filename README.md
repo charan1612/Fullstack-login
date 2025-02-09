@@ -7,6 +7,10 @@ A full-stack web application for discovering recipes, built with React, Material
 ![image](https://github.com/user-attachments/assets/04981bb2-6890-4f7b-8f99-98d707b333c1)
 
 
+![image](https://github.com/user-attachments/assets/116588e2-36a7-4772-b243-5e91a59cb04b)
+
+
+
 ## Features ✨
 
 - **User Authentication**: Secure signup/login with password hashing
@@ -74,4 +78,4 @@ npm start
 
 Note:- in .eve file place your mongodb credentails.
 
-# if still any errors appering contact me on mail mail parugula.saicharan@gmail.com
+if still any errors appering contact me on mail mail parugula.saicharan@gmail.com
