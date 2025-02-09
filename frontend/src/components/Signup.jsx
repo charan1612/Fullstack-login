@@ -1,8 +1,9 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Button, TextField, Container, Typography, Box } from '@mui/material';
+import { Button, TextField, Container, Typography, Box, Link } from '@mui/material';
 import axios from 'axios';
+import { Link as RouterLink } from 'react-router-dom';
 
 const validationSchema = Yup.object({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -82,11 +83,17 @@ const Signup = () => {
           >
             Sign Up
           </Button>
-          
+
+          {/* Added login link */}
+          <Box textAlign="center" sx={{ mt: 2 }}>
+            <Link component={RouterLink} to="/login" variant="body2">
+              Already have an account? Login
+            </Link>
+          </Box>
         </form>
       </Box>
     </Container>
   );
 };
 
-export default Signup; // ✅ Only one export
+export default Signup;
