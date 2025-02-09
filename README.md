@@ -44,7 +44,7 @@ A full-stack web application for discovering recipes, built with React, Material
 
 # Step-1: Cloning:-
 
-git clone https://github.com/charan1612/Fullstack-login.git
+https://github.com/charan1612/Recipe-Finder-with-MERN.git
 
 # step-2: Backend:-
 
