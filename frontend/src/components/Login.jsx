@@ -3,33 +3,33 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Button, TextField, Container, Typography, Box, Link } from '@mui/material';
 import axios from 'axios';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 const validationSchema = Yup.object({
-  email: Yup.string().email('Invalid email address').required('Email is required'),
-  password: Yup.string().required('Password is required')
+  email: Yup.string().email('Invalid email').required('Required'),
+  password: Yup.string().required('Required')
 });
 
-const Login = () => {
+const Login = ({ setIsAuthenticated }) => {
+  const navigate = useNavigate();
+  
   const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: ''
-    },
-    validationSchema: validationSchema,
+    initialValues: { email: '', password: '' },
+    validationSchema,
     onSubmit: async (values, { setSubmitting, setFieldError }) => {
       try {
         const response = await axios.post('http://localhost:5000/api/login', {
           email: values.email,
           password: values.password
         });
-        
-        // Handle successful login (you can add redirect logic here)
-        alert('Login successful!');
-        console.log('Login response:', response.data);
-        
+
+        // Store token and update auth state
+        localStorage.setItem('token', response.data.token);
+        setIsAuthenticated(true);
+        navigate('/dashboard');
+
       } catch (err) {
-        setFieldError('email', err.response?.data?.message || 'Login failed. Please try again.');
+        setFieldError('email', err.response?.data?.message || 'Login failed');
       }
       setSubmitting(false);
     }
@@ -37,19 +37,17 @@ const Login = () => {
 
   return (
     <Container maxWidth="xs">
-      <Box sx={{ mt: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Typography variant="h4" component="h1" gutterBottom>
+      <Box sx={{ mt: 8 }}>
+        <Typography variant="h4" align="center" gutterBottom>
           Login
         </Typography>
-        
-        <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
+        <form onSubmit={formik.handleSubmit}>
           <TextField
             fullWidth
             id="email"
             name="email"
-            label="Email Address"
+            label="Email"
             margin="normal"
-            autoComplete="email"
             {...formik.getFieldProps('email')}
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
@@ -62,7 +60,6 @@ const Login = () => {
             label="Password"
             type="password"
             margin="normal"
-            autoComplete="current-password"
             {...formik.getFieldProps('password')}
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
@@ -78,7 +75,7 @@ const Login = () => {
             {formik.isSubmitting ? 'Logging in...' : 'Login'}
           </Button>
 
-          <Box sx={{ textAlign: 'center' }}>
+          <Box textAlign="center">
             <Link component={RouterLink} to="/signup" variant="body2">
               Don't have an account? Sign Up
             </Link>
